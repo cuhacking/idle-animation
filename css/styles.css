@@ -1,15 +1,27 @@
+* {
+  --animation-scale: 3;
+}
+
 html,
 body,
-#root {
+#root,
+#bkg,
+#dots {
   width: 100%;
   height: 100%;
 }
 
+#bkg,
+#dots {
+  position: absolute;
+}
+
 body {
   margin: 0;
-  background: center / cover no-repeat url('../assets/bkg-fullscreen.svg');
-
   overflow: hidden;
+
+  will-change: transform;
+  animation: zoomOut calc(1s * var(--animation-scale)) ease-out forwards;
 }
 
 #root {
@@ -21,8 +33,48 @@ body {
   position: relative;
 }
 
+#bkg {
+  background: center / cover no-repeat url('../assets/bkg-fullscreen.svg');
+
+  will-change: transform;
+  animation: zoomOut calc(1s * var(--animation-scale)) ease-out forwards;
+}
+
+#dots {
+  background: center / cover no-repeat url('../assets/dot-layer.svg');
+
+  will-change: transform;
+  animation: zoomOut calc(1s * var(--animation-scale)) ease-out forwards;
+}
+
 #particles-js {
   position: absolute;
   width: 100%;
   height: 100%;
+
+  will-change: opacity;
+  animation: fadeIn calc(2s * var(--animation-scale)) ease-out forwards;
+}
+
+#logo {
+  will-change: opacity;
+  animation: fadeIn calc(0.75s * var(--animation-scale)) ease-out forwards;
+}
+
+@keyframes zoomOut {
+  from {
+    transform: scale(1.1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
